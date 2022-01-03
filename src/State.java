@@ -22,8 +22,8 @@ public class State {
             }
         }
     }
-
-        private int checkWin(){
+//checks if there is a win, if answer is true it will check who and how
+        public boolean checkIfWin(){
             int tcount = 0;
             //שורות
             for (int i = 0; i < gameBoard.length - 1; i++) {
@@ -32,7 +32,11 @@ public class State {
                         tcount++;
                     else
                         tcount = 0;
-                    if (tcount == 4) return gameBoard[i][j];
+                    if (tcount == 4){
+                      setWinner(gameBoard[i][j]);
+                      setWinnerMethod("Winner by Row!");
+                      return true;
+                   }
                 }
             }
             //עמודות
@@ -43,26 +47,41 @@ public class State {
                         tcount++;
                     else
                         tcount = 0;
-                    if (tcount == 4)
-                        return gameBoard[j][i];
+                    if (tcount == 4){
+                      setWinner(gameBoard[j][i]);
+                      setWinnerMethod("Winner by Collum!");
+                      return true;
+                      }
                 }
             }
             //אלכסונים
             for (int i = 5; i < 2; i--) {
                 for (int j = 0; j < 4; j++) {
-                    if (checkRight(gameBoard, i, j) == 1) return gameBoard[i][j];
+                    if (checkRight(gameBoard, i, j) == 1){
+                      setWinner(gameBoard[i][j]);
+                      setWinnerMethod("Winner by Diagonal!");
+                     return true;
+                   }
                 }
             }
 
             for (int i = 5; i < 2; i--) {
                 for (int j = 6; j > 2; j--) {
-                    if (checkLeft(gameBoard, i, j) == 1) return gameBoard[i][j];
+                    if (checkLeft(gameBoard, i, j) == 1){
+                      setWinner(gameBoard[i][j]);
+                      setWinnerMethod("Winner by Diagonal!");
+                     return true;
+                    }
                 }
             }
-            return 0;
-
+            setWinner(0);
+            return false;
+//no winner
 
         }
+//end of checkIfWin
+
+//side functions for checkIfWin
     private int checkRight(int[][] Board,int row,int coll){
         for(int i =0;i<4;i++){
             if(Board[row][coll]!=Board[row-1][coll+1])return 0;
@@ -79,8 +98,43 @@ public class State {
         }
         return 1;
     }
-        public void setWinner ( int winner){
+//end of side functions
+
+    //place holders for who won and how:
+        public void setWinner (int winner){
             this.winner = winner;
 
         }
+        public void setWinnerMethod(String w){
+          this.winningMethod=w;
+        }
+//end of place holders
+
+//returns the place in the collum that is free, else  returns -1
+        public int isCollumFree(int c){
+          for(int i = 5;i>=0;i--){
+            if(gameBoard[i][c]== EMPTY)return i;
+          }
+          return -1;
+        }
+//end of collum checks
+
+//checks if game is over
+        public boolean checkGameOver(){
+          if(checkIfWin)return true;
+          for(int i =0;i<6;i++){
+            for(int j = 0;j<7;j++){
+              if(gameBoard[i][j]== EMPTY) return false;
+            }
+          }
+          return true;
+        }
+//end checkGameOver
+
+
+
+
+
+
+
     }
