@@ -26,7 +26,7 @@ public class State {
         public boolean checkIfWin(){
             int tcount = 0;
             //שורות
-            for (int i = 0; i < gameBoard.length - 1; i++) {
+            for (int i = 0; i < gameBoard.length-1; i++) {
                 for (int j = 0; j < gameBoard[i].length; j++) {
                     if (gameBoard[i][j] != 0 && gameBoard[i][j] == gameBoard[i][j + 1])
                         tcount++;
@@ -38,6 +38,7 @@ public class State {
                       return true;
                    }
                 }
+                tcount = 0;
             }
             //עמודות
             tcount = 0;
@@ -53,6 +54,7 @@ public class State {
                       return true;
                       }
                 }
+                tcount = 0;
             }
             //אלכסונים
             for (int i = 5; i < 2; i--) {
@@ -81,7 +83,7 @@ public class State {
         }
 //end of checkIfWin
 
-//side functions for checkIfWin
+//side functions for checkIfWin (4 in a row)
     private int checkRight(int[][] Board,int row,int coll){
         for(int i =0;i<4;i++){
             if(Board[row][coll]!=Board[row-1][coll+1])return 0;
@@ -130,6 +132,179 @@ public class State {
           return true;
         }
 //end checkGameOver
+
+//check if there are 3 in a row
+      public int check3In(int p){
+        int  times = 0;
+        int tcount = 0;
+        //שורות
+        for (int i = 0; i < gameBoard.length-1; i++) {
+          tcount = 0;
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                if (gameBoard[i][j] == p && gameBoard[i][j] == gameBoard[i][j + 1])
+                    tcount++;
+                else
+                    tcount = 0;
+                  }
+                if (tcount == 3){
+                  times++;
+               }
+
+        }
+        //עמודות
+        tcount = 0;
+        for (int i = 0; i < gameBoard.length; i++) {
+          tcount = 0;
+            for (int j = 0; j < gameBoard[i].length - 1; j++) {
+                if (gameBoard[j][i] == p && gameBoard[j + 1][i] == gameBoard[j][i])
+                    tcount++;
+                else
+                    tcount = 0;
+                  }
+                if (tcount == 3){
+                  times++;
+                  }
+
+        }
+        //אלכסונים
+        for (int i = 5; i < 1; i--) {
+            for (int j = 0; j < 5; j++) {
+                if (checkRight3(gameBoard, i, j,p) == 1){
+                  times++;
+               }
+            }
+        }
+
+        for (int i = 5; i < 1; i--) {
+            for (int j = 6; j > 1; j--) {
+                if (checkLeft3(gameBoard, i, j,p) == 1){
+                  times++;
+                }
+            }
+        }
+        return times;
+      }
+      //end of check3Ln
+
+
+      //side functions for check3Ln (3 in a row)
+          private int checkRight3(int[][] Board,int row,int coll,int p){
+              for(int i =0;i<3;i++){
+                  if(Board[row][coll]!=p || Board[row][coll]!=Board[row-1][coll+1])return 0;
+                  row--;
+                  coll++;
+              }
+              return 1;
+          }
+          private int checkLeft3(int[][] Board,int row,int coll,int p){
+              for(int i =0;i<3;i++){
+                  if(Board[row][coll]!=p || Board[row][coll]!=Board[row-1][coll-1])return 0;
+                  row--;
+                  coll--;
+              }
+              return 1;
+          }
+          //end of side functions
+
+
+
+//check if there are 2 in a row
+          public int chec2In(int p){
+            int times  = 0;
+            int tcount = 0;
+            //שורות
+            for (int i = 0; i < gameBoard.length-1; i++) {
+              tcount = 0;
+                for (int j = 0; j < gameBoard[i].length; j++) {
+                    if (gameBoard[i][j] == p && gameBoard[i][j] == gameBoard[i][j + 1])
+                        tcount++;
+                    else
+                        tcount = 0;
+                      }
+                    if (tcount == 2){
+                      times++;
+                   }
+
+            }
+            //עמודות
+            tcount = 0;
+            for (int i = 0; i < gameBoard.length; i++) {
+              tcount = 0;
+                for (int j = 0; j < gameBoard[i].length - 1; j++) {
+                    if (gameBoard[j][i] == p && gameBoard[j + 1][i] == gameBoard[j][i])
+                        tcount++;
+                    else
+                        tcount = 0;
+                      }
+                    if (tcount == 2){
+                      times++;
+                      }
+
+            }
+            //אלכסונים
+            for (int i = 5; i < 0; i--) {
+                for (int j = 0; j < 6; j++) {
+                    if (checkRight2(gameBoard, i, j,p) == 1){
+                      times++;
+                   }
+                }
+            }
+
+            for (int i = 5; i < 0; i--) {
+                for (int j = 6; j > 0; j--) {
+                    if (checkLeft2(gameBoard, i, j,p) == 1){
+                      times++;
+                    }
+                }
+            }
+            return times;
+          }
+          //end of check2Ln
+
+
+          //side functions for check2Ln (2 in a row)
+              private int checkRight2(int[][] Board,int row,int coll,int p){
+                  for(int i =0;i<2;i++){
+                      if(Board[row][coll]!=p || Board[row][coll]!=Board[row-1][coll+1])return 0;
+                      row--;
+                      coll++;
+                  }
+                  return 1;
+              }
+              private int checkLeft2(int[][] Board,int row,int coll,int p){
+                  for(int i =0;i<2;i++){
+                      if(Board[row][coll]!=p || Board[row][coll]!=Board[row-1][coll-1])return 0;
+                      row--;
+                      coll--;
+                  }
+                  return 1;
+              }
+              //end of side functions
+
+              public int pointsFunction(){
+                //Computer players 'O'
+                // if computer wins: +90
+                //if computer has 3 'O' in a row = +10. if 3 'X' in a row = -5.
+                //if computer has 2 'O' in a row = +4. if 2 'X' in a row = -1.
+                int Xpoints = 0;
+                int Opoints = 0;
+                if(checkIfWin){
+                  if(winner==-1){
+                    Opoints+=90;
+                  }
+                  else{
+                    Xpoints+=90;
+                  }
+                }
+                Xlines+= check3In(-1)*10 + check2In(-1)*4;
+                Olines+= check3In(1)*5 + check2In(1);
+                return Olines-Xlines;
+
+
+              }
+
+
+
 
 
 
