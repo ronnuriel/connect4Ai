@@ -19,36 +19,57 @@ public class State {
         for(int i=0; i<6; i++) {
             for(int j=0; j<7; j++) {
                 gameBoard[i][j] = EMPTY;
+
             }
         }
+    }
+        public boolean makeMove(int col, int player){
+        if(col-1<0||col-1>7){
+            System.out.print("Illegal Collum choice, please pick agian");
+            return false;
+        }
+        if(isCollumFree(col-1)==-1){
+             System.out.print("This collum is full, please pick a diffrent one");
+                return false;
+         }
+            if(player%2==1){
+            gameBoard[isCollumFree(col-1)][col-1]=1;
+            }
+            else{
+            gameBoard[isCollumFree(col-1)][col-1]=-1;
+            }
+            return true;
     }
 //checks if there is a win, if answer is true it will check who and how
         public boolean checkIfWin(){
             int tcount = 0;
             //שורות
-            for (int i = 0; i < gameBoard.length-1; i++) {
+            for (int i = 0; i < gameBoard.length; i++) {
                 for (int j = 0; j < gameBoard[i].length; j++) {
-                    if (gameBoard[i][j] != 0 && gameBoard[i][j] == gameBoard[i][j + 1])
+                    if (gameBoard[i][j] != EMPTY && gameBoard[i][j] == gameBoard[i][j + 1]) {
                         tcount++;
+
+                        if (tcount == 3){
+                            setWinner(gameBoard[i][j]);
+                            setWinnerMethod("Winner by Row!");
+                            return true;
+                        }
+                    }
                     else
                         tcount = 0;
-                    if (tcount == 4){
-                      setWinner(gameBoard[i][j]);
-                      setWinnerMethod("Winner by Row!");
-                      return true;
-                   }
+
                 }
                 tcount = 0;
             }
             //עמודות
             tcount = 0;
             for (int i = 0; i < gameBoard.length; i++) {
-                for (int j = 0; j < gameBoard[i].length - 1; j++) {
+                for (int j = 0; j < gameBoard[i].length - 2; j++) {
                     if (gameBoard[j][i] != 0 && gameBoard[j + 1][i] == gameBoard[j][i])
                         tcount++;
                     else
                         tcount = 0;
-                    if (tcount == 4){
+                    if (tcount == 3){
                       setWinner(gameBoard[j][i]);
                       setWinnerMethod("Winner by Collum!");
                       return true;
@@ -57,16 +78,18 @@ public class State {
                 tcount = 0;
             }
             //אלכסונים
-            for (int i = 5; i < 2; i--) {
+
+            for (int i = 5; i > 2; i--) {
                 for (int j = 0; j < 4; j++) {
-                    if (checkRight(gameBoard, i, j) == 1){
+                    if (checkRight(gameBoard,i,j)==1){
                       setWinner(gameBoard[i][j]);
                       setWinnerMethod("Winner by Diagonal!");
                      return true;
                    }
+
                 }
             }
-
+            /*
             for (int i = 5; i < 2; i--) {
                 for (int j = 6; j > 2; j--) {
                     if (checkLeft(gameBoard, i, j) == 1){
@@ -75,7 +98,7 @@ public class State {
                      return true;
                     }
                 }
-            }
+            }*/
             setWinner(0);
             return false;
 //no winner
@@ -84,16 +107,21 @@ public class State {
 //end of checkIfWin
 
 //side functions for checkIfWin (4 in a row)
-    private int checkRight(int[][] Board,int row,int coll){
-        for(int i =0;i<4;i++){
-            if(Board[row][coll]!=Board[row-1][coll+1])return 0;
-            row--;
-            coll++;
+    public int checkRight(int[][] Board,int row,int coll) {
+        for (int i = 0; i < 3; i++) {
+            if (Board[row][coll] != Board[row - 1][coll + 1] && Board[row][coll]!= 0) {
+                return -1;
+            }
+                row--;
+                coll++;
         }
         return 1;
     }
+
+
+
     private int checkLeft(int[][] Board,int row,int coll){
-        for(int i =0;i<4;i++){
+        for(int i =0;i<3;i++){
             if(Board[row][coll]!=Board[row-1][coll-1])return 0;
             row--;
             coll--;
@@ -123,7 +151,7 @@ public class State {
 
 //checks if game is over
         public boolean checkGameOver(){
-          if(checkIfWin)return true;
+          if(checkIfWin())return true;
           for(int i =0;i<6;i++){
             for(int j = 0;j<7;j++){
               if(gameBoard[i][j]== EMPTY) return false;
@@ -209,7 +237,7 @@ public class State {
 
 
 //check if there are 2 in a row
-          public int chec2In(int p){
+          public int check2In(int p){
             int times  = 0;
             int tcount = 0;
             //שורות
@@ -288,7 +316,7 @@ public class State {
                 //if computer has 2 'O' in a row = +4. if 2 'X' in a row = -1.
                 int Xpoints = 0;
                 int Opoints = 0;
-                if(checkIfWin){
+                if(checkIfWin()){
                   if(winner==-1){
                     Opoints+=90;
                   }
@@ -296,9 +324,9 @@ public class State {
                     Xpoints+=90;
                   }
                 }
-                Xlines+= check3In(-1)*10 + check2In(-1)*4;
-                Olines+= check3In(1)*5 + check2In(1);
-                return Olines-Xlines;
+                Xpoints+= check3In(-1)*10 + check2In(-1)*4;
+                Opoints+= check3In(1)*5 + check2In(1);
+                return Opoints-Xpoints;
 
 
               }
