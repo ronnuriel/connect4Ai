@@ -1,4 +1,4 @@
-public class MinMax {
+/*public class MinMax {
     //Implinet min max func
 
 //    function  minimax(node, depth, maximizingPlayer) is
@@ -32,3 +32,4 @@ public int minimax(node, int depth,char maximizingPlayer) {
 
 
 }
+*/
