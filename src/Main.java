@@ -1,28 +1,39 @@
 import java.net.StandardSocketOptions;
-
+import java.util.*;
 public class Main {
     //THE HOST
 
     public static void main (String[] main){
+        Scanner input = new Scanner(System.in);
 //Must check if there is a winner each round, before checking if there is 3 in a row, or 2.
-      State test = new State();
-      test.printBoard();
-      test.makeMove(1,2);
-      /*
-      test.makeMove(2,1);
-        test.makeMove(2,2);
-        test.makeMove(3,1);
-        test.makeMove(3,1);
-        test.makeMove(3,1);
-        test.makeMove(4,1);
-        test.makeMove(4,1);
-        test.makeMove(4,1);
-        test.makeMove(4,2);
-
-*/
-
-      test.printBoard();
-      System.out.print(test.checkIfWin());
+      State game = new State();
+      int count = 1;
+      while(!game.checkGameOver()){
+          game.printBoard();
+          if(count==1){
+              System.out.println("Player 1's Turn!");
+          }
+          else{
+              System.out.println("Player 2's Turn!");
+          }
+          System.out.println("Please Pick your column:");
+          int choice = input.nextInt();
+          while(!game.makeMove(choice,count))
+              choice=input.nextInt();
+          count = count*-1;
+      }
+      game.printBoard();
+      if(game.getWinner()==1){
+          System.out.print("Player one: " + game.getWinnerMethod());
+      }
+      else{
+          if(game.getWinner()==-1){
+              System.out.print("Player two: " + game.getWinnerMethod());
+          }
+          else{
+              System.out.print("Its a tie!");
+          }
+      }
     }
 
 }
