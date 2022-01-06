@@ -1,5 +1,5 @@
-/*public class MinMax {
-    //Implinet min max func
+public class MinMax {
+   /* //Implinet min max func
 
 //    function  minimax(node, depth, maximizingPlayer) is
 //    if depth = 0 or node is a terminal node then
@@ -28,8 +28,31 @@ public int minimax(node, int depth,char maximizingPlayer) {
 		else: # Depth is zero
     return (None, score_position(board, AI_PIECE))
 }
+*/
+public int pickBestMove(State cBoard){
+    State nBoard = new State(cBoard);
+    int[] Scores = new int[7];
+    int row = -1;
+    for(int i =0;i<7;i++)  Scores[i] = -100000000;
+    for(int i =0;i<7;i++){
+        if(nBoard.isCollumFree(i)!=-1){
+            nBoard.makeMove(i+1,-1);
+            Scores[i]=nBoard.pointsFunction();
+            nBoard = new State(cBoard);
+        }
+    }
+    int bCol = -1;
+    int mPoints = -1000000;
+    for(int i =0;i<7;i++){
+        System.out.println(Scores[i]);
+        if(Scores[i]>mPoints){
+            mPoints=Scores[i];
+            bCol=i;
+        }
+    }
+    return bCol+1;
 
+}
 
 
 }
-*/

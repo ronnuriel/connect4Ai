@@ -7,7 +7,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
 //Must check if there is a winner each round, before checking if there is 3 in a row, or 2.
       State game = new State();
-      int count = 1;
+      /*int count = 1;
       while(!game.checkGameOver()){
           game.printBoard();
           if(count==1){
@@ -33,7 +33,19 @@ public class Main {
           else{
               System.out.print("Its a tie!");
           }
-      }
+      }*/
+        MinMax AI = new MinMax();
+        game.makeMove(1,1);
+        game.makeMove(1,1);
+        game.makeMove(1,1);
+        game.makeMove(2,-1);
+        game.makeMove(2,-1);
+        game.makeMove(2,-1);
+        game.makeMove(2,1);
+        //game.makeMove(7,-1);
+        //game.makeMove(7,-1);
+        game.printBoard();
+        System.out.print(AI.pickBestMove(game));
     }
 
 }
