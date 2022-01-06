@@ -35,17 +35,21 @@ public class Main {
           }
       }*/
         MinMax AI = new MinMax();
-        game.makeMove(1,1);
-        game.makeMove(1,1);
-        game.makeMove(1,1);
-        game.makeMove(2,-1);
-        game.makeMove(2,-1);
-        game.makeMove(2,-1);
+/*
         game.makeMove(2,1);
-        //game.makeMove(7,-1);
-        //game.makeMove(7,-1);
+        game.makeMove(2,1);
+        game.makeMove(2,1);
+        game.makeMove(3,-1);
+        game.makeMove(3,-1);
+*/
+        game.makeMove(1,1);
+        game.makeMove(1,-1);
+        game.makeMove(1,-1);
+        game.makeMove(1,-1);
+        game.makeMove(2,1);
+        game.makeMove(3,1);
         game.printBoard();
-        System.out.print(AI.pickBestMove(game));
+        System.out.print(AI.pickBestMove(game,-1));
     }
 
 }

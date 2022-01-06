@@ -29,14 +29,14 @@ public int minimax(node, int depth,char maximizingPlayer) {
     return (None, score_position(board, AI_PIECE))
 }
 */
-public int pickBestMove(State cBoard){
+public int pickBestMove(State cBoard,int player){
     State nBoard = new State(cBoard);
     int[] Scores = new int[7];
     int row = -1;
     for(int i =0;i<7;i++)  Scores[i] = -100000000;
     for(int i =0;i<7;i++){
         if(nBoard.isCollumFree(i)!=-1){
-            nBoard.makeMove(i+1,-1);
+            nBoard.makeMove(i+1,player);
             Scores[i]=nBoard.pointsFunction();
             nBoard = new State(cBoard);
         }
