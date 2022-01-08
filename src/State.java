@@ -261,6 +261,16 @@ public class State {
                       if (isLegal(i,j+1)){
                           if (gameBoard[i][j]==p && gameBoard[i][j] != EMPTY && gameBoard[i][j] == gameBoard[i][j + 1]){
                               times++;
+                              if(isLegal(i,j+3)){
+                                  if(isCollumFree(j+2)==i&&gameBoard[i][j+3]!=p*-1&&gameBoard[i][j+3]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
+                              if(isLegal(i,j-2)){
+                                  if(isCollumFree(j-1)==i&&gameBoard[i][j-2]!=p*-1&&gameBoard[i][j-2]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
                           }
                       }
 
@@ -284,6 +294,16 @@ public class State {
                           if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j+1]&&
                                   gameBoard[i][j]!= EMPTY) {
                               times++;
+                              if(isLegal(i-3,j+3)){
+                                  if(isCollumFree(j+2)==i-2&&gameBoard[i-3][j+3]!=p*-1&&gameBoard[i-3][j+3]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
+                              if(isLegal(i+2,j-2)){
+                                  if(isCollumFree(j-1)==i+1&&gameBoard[i+2][j-2]!=p*-1&&gameBoard[i+2][j-2]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
                           }
                       }
 
@@ -295,6 +315,16 @@ public class State {
                           if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j-1]&&
                                   gameBoard[i][j]!= EMPTY) {
                               times++;
+                              if(isLegal(i-3,j-3)){
+                                  if(isCollumFree(j-2)==i-2&&gameBoard[i-3][j-3]!=p*-1&&gameBoard[i-3][j-3]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
+                              if(isLegal(i+2,j+2)){
+                                  if(isCollumFree(j+1)==i+1&&gameBoard[i+2][j+2]!=p*-1&&gameBoard[i+2][j+2]!=EMPTY){
+                                      times+=5;
+                                  }
+                              }
                           }
                       }
 

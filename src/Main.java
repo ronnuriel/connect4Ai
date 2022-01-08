@@ -42,12 +42,16 @@ public class Main {
         game.makeMove(3,-1);
         game.makeMove(3,-1);
 */
+        game.makeMove(1,-1);
+        game.makeMove(1,-1);
         game.makeMove(1,1);
-        game.makeMove(1,-1);
-        game.makeMove(1,-1);
-        game.makeMove(1,-1);
+        game.makeMove(1,1);
+        game.makeMove(2,-1);
         game.makeMove(2,1);
         game.makeMove(3,1);
+        game.makeMove(3,1);
+        //game.makeMove(3,1);
+        game.makeMove(4,1);
         game.printBoard();
         System.out.print(AI.pickBestMove(game,-1));
     }
