@@ -1,5 +1,5 @@
 public class MinMax {
-   /* //Implinet min max func
+   /* //Implement min max func
 
 //    function  minimax(node, depth, maximizingPlayer) is
 //    if depth = 0 or node is a terminal node then
@@ -32,7 +32,6 @@ public int minimax(node, int depth,char maximizingPlayer) {
 public int pickBestMove(State cBoard,int player){
     State nBoard = new State(cBoard);
     int[] Scores = new int[7];
-    int row = -1;
     for(int i =0;i<7;i++)  Scores[i] = -100000000;
     for(int i =0;i<7;i++){
         if(nBoard.isCollumFree(i)!=-1){
