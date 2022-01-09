@@ -169,12 +169,12 @@ public class State {
                           times++;
                           if(isLegal(i,j+3)) {
                               if (isCollumFree(j+3)==i && gameBoard[i][j + 3] == EMPTY) {
-                                  times += 2;
+                                  times += 3;
                               }
                           }
                           if(isLegal(i,j-1)){
                               if(isCollumFree(j-1)==i && gameBoard[i][j - 1] == EMPTY) {
-                                  times += 2;
+                                  times += 3;
                               }
                           }
                       }
@@ -193,7 +193,7 @@ public class State {
                           times++;
                           if(isLegal(i-1,j)) {
                               if (isCollumFree(j)==i-1 && gameBoard[i -1][j] == EMPTY) {
-                                  times += 2;
+                                  times += 3;
                               }
                           }
                       }
@@ -212,12 +212,12 @@ public class State {
                           times++;
                           if(isLegal(i-3,j+3)){
                               if(isCollumFree(j+3)==i-3){
-                                  times+=2;
+                                  times+=3;
                               }
                           }
                           if(isLegal(i+1,j-1)){
                               if(isCollumFree(j-1)==i+1){
-                                  times+=2;
+                                  times+=3;
                               }
                           }
                       }
@@ -234,12 +234,12 @@ public class State {
                           times++;
                           if(isLegal(i-3,j-3)){
                               if(isCollumFree(j-3)==i-3&&gameBoard[i-3][j-3]==EMPTY){
-                                  times+=2;
+                                  times+=3;
                               }
                           }
                           if(isLegal(i+1,j+1)){
                               if(isCollumFree(j+1)==i+1){
-                                  times+=2;
+                                  times+=3;
                               }
                           }
                       }
@@ -263,12 +263,12 @@ public class State {
                               times++;
                               if(isLegal(i,j+3)){
                                   if(isCollumFree(j+2)==i&&gameBoard[i][j+3]!=p*-1&&gameBoard[i][j+3]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                               if(isLegal(i,j-2)){
                                   if(isCollumFree(j-1)==i&&gameBoard[i][j-2]!=p*-1&&gameBoard[i][j-2]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                           }
@@ -296,12 +296,12 @@ public class State {
                               times++;
                               if(isLegal(i-3,j+3)){
                                   if(isCollumFree(j+2)==i-2&&gameBoard[i-3][j+3]!=p*-1&&gameBoard[i-3][j+3]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                               if(isLegal(i+2,j-2)){
                                   if(isCollumFree(j-1)==i+1&&gameBoard[i+2][j-2]!=p*-1&&gameBoard[i+2][j-2]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                           }
@@ -317,12 +317,12 @@ public class State {
                               times++;
                               if(isLegal(i-3,j-3)){
                                   if(isCollumFree(j-2)==i-2&&gameBoard[i-3][j-3]!=p*-1&&gameBoard[i-3][j-3]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                               if(isLegal(i+2,j+2)){
                                   if(isCollumFree(j+1)==i+1&&gameBoard[i+2][j+2]!=p*-1&&gameBoard[i+2][j+2]!=EMPTY){
-                                      times+=5;
+                                      times+=7;
                                   }
                               }
                           }
@@ -344,10 +344,10 @@ public class State {
                 int Opoints = 0;
                 if(checkIfWin()){
                   if(winner==-1){
-                    Opoints+=90;
+                    Opoints+=100;
                   }
                   else{
-                    Xpoints+=90;
+                    Xpoints+=100;
                   }
                 }
                 Opoints+= check3In(O)*5 + check2In(O);
