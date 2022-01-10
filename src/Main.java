@@ -5,9 +5,9 @@ public class Main {
 
     public static void main (String[] main){
         Scanner input = new Scanner(System.in);
-//Must check if there is a winner each round, before checking if there is 3 in a row, or 2.
       State game = new State();
-      int count = 1;
+        int count = 1;
+      /* <--- two player game
       while(!game.checkGameOver()){
           game.printBoard();
           if(count==1){
@@ -33,7 +33,42 @@ public class Main {
           else{
               System.out.print("Its a tie!");
           }
-      }
+      }*/
+        // AI VS Player game
+
+        MinMax AI = new MinMax();
+
+        while(!game.checkGameOver()){
+            game.printBoard();
+            if(count==1){
+                System.out.println("Player 1's Turn!");
+                System.out.println("Please Pick your column:");
+                int choice = input.nextInt();
+                while(!game.makeMove(choice,count))
+                    choice=input.nextInt();
+            }
+            else{
+                System.out.println("AI's Turn!");
+                AI.miniMax(game,3,true);
+                System.out.print(AI.getCollumn());
+                game.makeMove(AI.getCollumn()+1,-1);
+            }
+            count = count*-1;
+        }
+        game.printBoard();
+        if(game.getWinner()==1){
+            System.out.print("Player one: " + game.getWinnerMethod());
+        }
+        else{
+            if(game.getWinner()==-1){
+                System.out.print("AI: " + game.getWinnerMethod());
+            }
+            else{
+                System.out.print("Its a tie!");
+            }
+        }
+
+
     }
 
 }

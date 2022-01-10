@@ -2,7 +2,7 @@ public class State {
 
     static final int X = 1;     //User (used in Main and switch case)
     static final int O = -1;    //Computer (used in Main and switch case)
-    int EMPTY = 0;              //Blank space
+    static final int EMPTY = 0;              //Blank space
     //We need to know the player that made the last move
     GamePlay lastMove;
     int lastLetterPlayed;
@@ -19,6 +19,18 @@ public class State {
         for(int i=0; i<6; i++) {
             for(int j=0; j<7; j++) {
                 gameBoard[i][j] = EMPTY;
+
+            }
+        }
+    }
+    public State(State n){
+        this.lastMove=n.lastMove;
+        this.lastLetterPlayed=n.lastLetterPlayed;
+        this.winner=n.winner;
+        gameBoard=new int[6][7];
+        for(int i=0; i<6; i++) {
+            for(int j=0; j<7; j++) {
+                gameBoard[i][j] = n.gameBoard[i][j];
 
             }
         }
@@ -40,7 +52,6 @@ public class State {
             }
             return true;
     }
-
     //place holders for who won and how:
     public void setWinner (int winner){this.winner = winner;}
     public void setWinnerMethod(String w){
@@ -156,7 +167,19 @@ public class State {
                       if (gameBoard[i][j]==p && gameBoard[i][j] != EMPTY && gameBoard[i][j] == gameBoard[i][j + 1]&&
                               gameBoard[i][j+1]==gameBoard[i][j+2]){
                           times++;
+                          if(isLegal(i,j+3)) {
+                              if (isCollumFree(j+3)==i && gameBoard[i][j + 3] == EMPTY) {
+                                  times += 3;
+                              }
+                          }
+                          if(isLegal(i,j-1)){
+                              if(isCollumFree(j-1)==i && gameBoard[i][j - 1] == EMPTY) {
+                                  times += 3;
+                              }
+                          }
                       }
+                      //checks if a winning move can happen:
+
                   }
 
               }
@@ -168,7 +191,14 @@ public class State {
                       if (gameBoard[i][j]==p && gameBoard[i][j] != EMPTY && gameBoard[i + 1][j] == gameBoard[i][j]
                               && gameBoard[i + 1][j] == gameBoard[i + 2][j]) {
                           times++;
+                          if(isLegal(i-1,j)) {
+                              if (isCollumFree(j)==i-1 && gameBoard[i -1][j] == EMPTY) {
+                                  times += 3;
+                              }
+                          }
                       }
+                      //checks if a winning move can happen:
+
                   }
               }
           }
@@ -180,7 +210,18 @@ public class State {
                       if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j+1]&&gameBoard[i-1][j+1]==gameBoard[i-2][j+2]&&
                               gameBoard[i][j]!= EMPTY) {
                           times++;
+                          if(isLegal(i-3,j+3)){
+                              if(isCollumFree(j+3)==i-3){
+                                  times+=3;
+                              }
+                          }
+                          if(isLegal(i+1,j-1)){
+                              if(isCollumFree(j-1)==i+1){
+                                  times+=3;
+                              }
+                          }
                       }
+
                   }
 
               }
@@ -191,7 +232,18 @@ public class State {
                       if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j-1]&&gameBoard[i-1][j-1]==gameBoard[i-2][j-2]&&
                               gameBoard[i][j]!= EMPTY) {
                           times++;
+                          if(isLegal(i-3,j-3)){
+                              if(isCollumFree(j-3)==i-3&&gameBoard[i-3][j-3]==EMPTY){
+                                  times+=3;
+                              }
+                          }
+                          if(isLegal(i+1,j+1)){
+                              if(isCollumFree(j+1)==i+1){
+                                  times+=3;
+                              }
+                          }
                       }
+
                   }
 
               }
@@ -209,6 +261,16 @@ public class State {
                       if (isLegal(i,j+1)){
                           if (gameBoard[i][j]==p && gameBoard[i][j] != EMPTY && gameBoard[i][j] == gameBoard[i][j + 1]){
                               times++;
+                              if(isLegal(i,j+3)){
+                                  if(isCollumFree(j+2)==i&&gameBoard[i][j+3]!=p*-1&&gameBoard[i][j+3]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
+                              if(isLegal(i,j-2)){
+                                  if(isCollumFree(j-1)==i&&gameBoard[i][j-2]!=p*-1&&gameBoard[i][j-2]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
                           }
                       }
 
@@ -232,6 +294,16 @@ public class State {
                           if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j+1]&&
                                   gameBoard[i][j]!= EMPTY) {
                               times++;
+                              if(isLegal(i-3,j+3)){
+                                  if(isCollumFree(j+2)==i-2&&gameBoard[i-3][j+3]!=p*-1&&gameBoard[i-3][j+3]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
+                              if(isLegal(i+2,j-2)){
+                                  if(isCollumFree(j-1)==i+1&&gameBoard[i+2][j-2]!=p*-1&&gameBoard[i+2][j-2]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
                           }
                       }
 
@@ -243,6 +315,16 @@ public class State {
                           if (gameBoard[i][j]==p && gameBoard[i][j]==gameBoard[i-1][j-1]&&
                                   gameBoard[i][j]!= EMPTY) {
                               times++;
+                              if(isLegal(i-3,j-3)){
+                                  if(isCollumFree(j-2)==i-2&&gameBoard[i-3][j-3]!=p*-1&&gameBoard[i-3][j-3]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
+                              if(isLegal(i+2,j+2)){
+                                  if(isCollumFree(j+1)==i+1&&gameBoard[i+2][j+2]!=p*-1&&gameBoard[i+2][j+2]!=EMPTY){
+                                      times+=7;
+                                  }
+                              }
                           }
                       }
 
@@ -254,7 +336,7 @@ public class State {
               //end of side functions
 
               public int pointsFunction(){
-                //Computer players 'O'
+                //Computer plays 'O'
                 // if computer wins: +90
                 //if computer has 3 'O' in a row = +10. if 3 'X' in a row = -5.
                 //if computer has 2 'O' in a row = +4. if 2 'X' in a row = -1.
@@ -262,16 +344,15 @@ public class State {
                 int Opoints = 0;
                 if(checkIfWin()){
                   if(winner==-1){
-                    Opoints+=90;
+                    Opoints+=100;
                   }
                   else{
-                    Xpoints+=90;
+                    Xpoints+=100;
                   }
                 }
-                Xpoints+= check3In(-1)*10 + check2In(-1)*4;
-                Opoints+= check3In(1)*5 + check2In(1);
+                Opoints+= check3In(O)*5 + check2In(O);
+                Xpoints+= check3In(X)*10 + check2In(X)*4;
                 return Opoints-Xpoints;
-
 
               }
 
