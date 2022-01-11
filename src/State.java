@@ -344,10 +344,10 @@ public class State {
                 int Opoints = 0;
                 if(checkIfWin()){
                   if(winner==-1){
-                    Opoints+=100;
+                    Opoints+=100000;
                   }
                   else{
-                    Xpoints+=100;
+                    Xpoints+=100000;
                   }
                 }
                 Opoints+= check3In(O)*5 + check2In(O);

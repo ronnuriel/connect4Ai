@@ -65,10 +65,10 @@ public int miniMax(State cBoard,int depth, boolean maximizingPlayer) {
     State nBoard;
     if (depth == 0 || cBoard.checkGameOver()) {
         if (cBoard.getWinner() == -1){
-            return 1000;
+            return 1000000000;
         }
         if (cBoard.getWinner() == 1){
-            return -1000;
+            return -1000000000;
         }
         if (depth == 0){
             return cBoard.pointsFunction();
@@ -89,8 +89,9 @@ public int miniMax(State cBoard,int depth, boolean maximizingPlayer) {
                 }
 
             }
+            //return value;
         }
-        return value;
+
     } else { //Minimizing player
         int new_score;
         value = 1000000000;
@@ -105,10 +106,11 @@ public int miniMax(State cBoard,int depth, boolean maximizingPlayer) {
                 }
 
             }
+            //return value;
             }
-        return value;
-        }
 
+        }
+    return value;
     }
 }
 /*

@@ -49,8 +49,7 @@ public class Main {
             }
             else{
                 System.out.println("AI's Turn!");
-                AI.miniMax(game,3,true);
-                System.out.print(AI.getCollumn());
+                AI.miniMax(game,7,false);
                 game.makeMove(AI.getCollumn()+1,-1);
             }
             count = count*-1;
@@ -67,7 +66,6 @@ public class Main {
                 System.out.print("Its a tie!");
             }
         }
-
 
     }
 
