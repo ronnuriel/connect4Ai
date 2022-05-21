@@ -35,6 +35,18 @@ public class State {
             }
         }
     }
+    public void reset() {
+        lastMove = new GamePlay();
+        lastLetterPlayed = O; //The user starts first
+        winner = 0;
+        gameBoard = new int[6][7]; //creates the board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                gameBoard[i][j] = EMPTY;
+
+            }
+        }
+    }
         public boolean makeMove(int col, int player){
         if(col-1<0||col-1>7){
             System.out.println("Illegal Collum choice, please pick agian:");
@@ -81,7 +93,14 @@ public class State {
         return true;
     }
     //end checkGameOver
+    public boolean checkForWinnerInGUI(int player){
+        if(checkIfWin()){
+            return true;
+        }
+            else return false;
 
+
+    }
     //checks if given position is legal (in the board)
     public boolean isLegal(int row,int col){
         if ((row <= -1) || (col <= -1) || (row > 5) || (col > 6)) {

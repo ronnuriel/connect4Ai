@@ -34,9 +34,8 @@ public class Main {
               System.out.print("Its a tie!");
           }
       }*/
-        // AI VS Player game
-
-        MinMax AI = new MinMax();
+        // CMD AI VS Player game
+        /*MinMax AI = new MinMax();
 
         while(!game.checkGameOver()){
             game.printBoard();
@@ -49,7 +48,7 @@ public class Main {
             }
             else{
                 System.out.println("AI's Turn!");
-                AI.miniMax(game,7,false);
+                AI.miniMax(game,5,false);
                 game.makeMove(AI.getCollumn()+1,-1);
             }
             count = count*-1;
@@ -66,7 +65,8 @@ public class Main {
                 System.out.print("Its a tie!");
             }
         }
-
+*/
+        GUI gameGui = new GUI(true,game,6,7);
     }
 
 }
