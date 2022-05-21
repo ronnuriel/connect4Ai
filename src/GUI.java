@@ -38,7 +38,6 @@ public class GUI extends JFrame {
         int row10plusCol = Integer.parseInt(button.getName());
         int col = row10plusCol % 10;
 
-        //boolean player1turn = game.isIs1playing();
         if(count==-1) setTitle(title + "Yellow");
         else setTitle(title + "Red");
 
@@ -56,38 +55,26 @@ public class GUI extends JFrame {
                     game.makeMove((row10plusCol + 1), -1);
                 }
                 count *= -1;
-                game.printBoard(); // remove later
+                //game.printBoard(); // remove later
             }
             else {
-                if (count == 1/*||count==-1*/) {
+                if (count == 1) {
                     JButton buttonToUpdate = ((JButton) (cp.getComponent(columns * addedRow + col)));
                     buttonToUpdate.setIcon(iconYellow);
                     game.makeMove((row10plusCol + 1), 1);
-                    //cp.add(buttonToUpdate);
-
-                /*AI.miniMax(game,5,false);
-                addedRow = game.isCollumFree(AI.getCollumn());
-                buttonToUpdate = ((JButton)(cp.getComponent(columns * addedRow + col)));
-                buttonToUpdate.setIcon(iconRed);
-                game.makeMove(AI.getCollumn()+1,-1);
-                //cp.add(buttonToUpdate);
-            */
                 } else {
                     AI.miniMax(game, AiLevel, false);
-                    System.out.print(AI.getCollumn());
-                    System.out.print(game.isCollumFree(AI.getCollumn()));
-                    System.out.println();
+                    //System.out.print(AI.getCollumn());
+                    //System.out.print(game.isCollumFree(AI.getCollumn()));
+                    //System.out.println();
                     addedRow = game.isCollumFree(AI.getCollumn());
                     JButton buttonToUpdate = ((JButton) (cp.getComponent(columns * addedRow + AI.getCollumn())));
                     buttonToUpdate.setIcon(iconRed);
                     game.makeMove(AI.getCollumn() + 1, -1);
-                    //cp.add(buttonToUpdate);
-                /*JButton buttonToUpdate = ((JButton)(cp.getComponent(columns * addedRow + col)));
-                buttonToUpdate.setIcon(iconRed);
-                game.makeMove((row10plusCol+1),-1);*/
+
                 }
                 count *= -1;
-                game.printBoard(); // remove later
+                //game.printBoard(); // remove later
             }
                 // check for winner
                 if (game.checkGameOver()) {
