@@ -8,21 +8,18 @@ import java.net.URL;
 import java.sql.SQLOutput;
 import javax.swing.*;
 
-/** Test setting Swing's JComponents properties and appearances */
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class GUI extends JFrame {
     private final Container cp;
 
     State game = new State();
     MinMax AI = new MinMax();
 
-    // TODO: Get it from the board
     int rows;
     int columns;
     int gameType; //PVP or PVC
     int AiLevel;
 
-    // TODO: Calculate them instead
     int windowWidth = 750;
     int windowHeight = 650;
 
@@ -151,12 +148,10 @@ public class GUI extends JFrame {
                 JButton button = new JButton(); // use setter to set text and icon
                 button.setIcon(iconEmpty);
                 button.setPreferredSize(new Dimension(100, 100));
-                // row * 10 + col
                 button.setName(Integer.toString((row * 10 + col)));
 
                 button.addActionListener(actionEvent -> worldsBestUpdater(((JButton) (actionEvent.getSource()))));
                 cp.add(button);
-                //button.addActionListener(ActionEvent -> aiTurn());
 
             }
         }
