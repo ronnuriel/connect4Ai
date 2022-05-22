@@ -251,6 +251,6 @@ public class GUI extends JFrame {
         AI.miniMax(game,6,true);
         int bestPlace = AI.getCollumn()+1;
         JOptionPane.showMessageDialog(null, "The Ai recommends placing in collunm number: " +
-                bestPlace);
+                bestPlace + " starting from the left");
     }
 }

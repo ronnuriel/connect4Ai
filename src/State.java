@@ -3,8 +3,6 @@ public class State {
     static final int X = 1;     //User (used in Main and switch case)
     static final int O = -1;    //Computer (used in Main and switch case)
     static final int EMPTY = 0;              //Blank space
-    //We need to know the player that made the last move
-    GamePlay lastMove;
     int lastLetterPlayed;
     int winner;
     int [][] gameBoard;
@@ -12,7 +10,6 @@ public class State {
     //------------
 
     public State() {
-        lastMove = new GamePlay();
         lastLetterPlayed = O; //The user starts first
         winner = 0;
         gameBoard = new int[6][7]; //creates the board
@@ -24,7 +21,6 @@ public class State {
         }
     }
     public State(State n){
-        this.lastMove=n.lastMove;
         this.lastLetterPlayed=n.lastLetterPlayed;
         this.winner=n.winner;
         gameBoard=new int[6][7];
@@ -36,7 +32,6 @@ public class State {
         }
     }
     public void reset() {
-        lastMove = new GamePlay();
         lastLetterPlayed = O; //The user starts first
         winner = 0;
         gameBoard = new int[6][7]; //creates the board
