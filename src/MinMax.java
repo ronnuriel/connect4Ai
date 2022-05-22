@@ -82,7 +82,7 @@ public int miniMax(State cBoard,int depth, boolean maximizingPlayer) {
             nBoard = new State(cBoard);
             if (nBoard.isCollumFree(i) != -1) {
                 nBoard.makeMove(i + 1, -1);
-                new_score = miniMax(nBoard, depth - 1, false);
+                new_score = miniMax(nBoard, depth - 1, maximizingPlayer);
                 if(new_score>value){
                     value=new_score;
                     setCollumn(i);

@@ -248,8 +248,8 @@ public class GUI extends JFrame {
         gameType();
     }
     public void hint(){
-        AI.miniMax(game,AiLevel+1,true);
-        int bestPlace = AI.getCollumn();
+        AI.miniMax(game,6,true);
+        int bestPlace = AI.getCollumn()+1;
         JOptionPane.showMessageDialog(null, "The Ai recommends placing in collunm number: " +
                 bestPlace);
     }
