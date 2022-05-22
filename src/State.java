@@ -3,8 +3,6 @@ public class State {
     static final int X = 1;     //User (used in Main and switch case)
     static final int O = -1;    //Computer (used in Main and switch case)
     static final int EMPTY = 0;              //Blank space
-    //We need to know the player that made the last move
-    GamePlay lastMove;
     int lastLetterPlayed;
     int winner;
     int [][] gameBoard;
@@ -12,7 +10,6 @@ public class State {
     //------------
 
     public State() {
-        lastMove = new GamePlay();
         lastLetterPlayed = O; //The user starts first
         winner = 0;
         gameBoard = new int[6][7]; //creates the board
@@ -24,13 +21,23 @@ public class State {
         }
     }
     public State(State n){
-        this.lastMove=n.lastMove;
         this.lastLetterPlayed=n.lastLetterPlayed;
         this.winner=n.winner;
         gameBoard=new int[6][7];
         for(int i=0; i<6; i++) {
             for(int j=0; j<7; j++) {
                 gameBoard[i][j] = n.gameBoard[i][j];
+
+            }
+        }
+    }
+    public void reset() {
+        lastLetterPlayed = O; //The user starts first
+        winner = 0;
+        gameBoard = new int[6][7]; //creates the board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                gameBoard[i][j] = EMPTY;
 
             }
         }
@@ -81,7 +88,14 @@ public class State {
         return true;
     }
     //end checkGameOver
+    public boolean checkForWinnerInGUI(int player){
+        if(checkIfWin()){
+            return true;
+        }
+            else return false;
 
+
+    }
     //checks if given position is legal (in the board)
     public boolean isLegal(int row,int col){
         if ((row <= -1) || (col <= -1) || (row > 5) || (col > 6)) {
@@ -344,10 +358,10 @@ public class State {
                 int Opoints = 0;
                 if(checkIfWin()){
                   if(winner==-1){
-                    Opoints+=100;
+                    Opoints+=100000;
                   }
                   else{
-                    Xpoints+=100;
+                    Xpoints+=100000;
                   }
                 }
                 Opoints+= check3In(O)*5 + check2In(O);

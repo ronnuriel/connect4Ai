@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="connect4AI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/connect4AI_jar</output-path>
+    <root id="archive" name="connect4AI.jar">
+      <element id="module-output" name="connect4AI" />
+    </root>
+  </artifact>
+</component>

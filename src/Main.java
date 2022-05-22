@@ -7,7 +7,23 @@ public class Main {
         Scanner input = new Scanner(System.in);
       State game = new State();
         int count = 1;
-      /* <--- two player game
+
+        GUI gameGui = new GUI(true,game,6,7);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+ /* <--- two player game
       while(!game.checkGameOver()){
           game.printBoard();
           if(count==1){
@@ -34,9 +50,8 @@ public class Main {
               System.out.print("Its a tie!");
           }
       }*/
-        // AI VS Player game
-
-        MinMax AI = new MinMax();
+// CMD AI VS Player game
+        /*MinMax AI = new MinMax();
 
         while(!game.checkGameOver()){
             game.printBoard();
@@ -49,8 +64,7 @@ public class Main {
             }
             else{
                 System.out.println("AI's Turn!");
-                AI.miniMax(game,3,true);
-                System.out.print(AI.getCollumn());
+                AI.miniMax(game,5,false);
                 game.makeMove(AI.getCollumn()+1,-1);
             }
             count = count*-1;
@@ -67,8 +81,4 @@ public class Main {
                 System.out.print("Its a tie!");
             }
         }
-
-
-    }
-
-}
+*/
