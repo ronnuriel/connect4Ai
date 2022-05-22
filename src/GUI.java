@@ -21,12 +21,18 @@ public class GUI extends JFrame {
     int AiLevel;
 
     int windowWidth = 750;
-    int windowHeight = 650;
+    int windowHeight = 750;
 
     // Prepare ImageIcons to be used with JComponents
     private ImageIcon iconEmpty = null;
     private ImageIcon iconRed = null;
     private ImageIcon iconYellow = null;
+    private ImageIcon iconHard = null;
+    private ImageIcon iconMedium = null;
+    private ImageIcon iconEasy = null;
+    private ImageIcon iconReset = null;
+    private ImageIcon iconHint = null;
+
 
     private final String title = "Connect 4 - ";
     int count = 1;
@@ -134,11 +140,35 @@ public class GUI extends JFrame {
         if (imgURL != null) iconRed = new ImageIcon(imgURL);
         else System.err.println("Couldn't find file: " + imgRedFilename);
 
-
         String imgYellowFilename = "images/yellow.png";
         imgURL = getClass().getClassLoader().getResource(imgYellowFilename);
         if (imgURL != null) iconYellow = new ImageIcon(imgURL);
         else System.err.println("Couldn't find file: " + imgYellowFilename);
+
+        String imgHardFilename = "images/Hard.png";
+        imgURL = getClass().getClassLoader().getResource(imgHardFilename);
+        if (imgURL != null) iconHard = new ImageIcon(imgURL);
+        else System.err.println("Couldn't find file: " + imgHardFilename);
+
+        String imgEasyFilename = "images/Easy.png";
+        imgURL = getClass().getClassLoader().getResource(imgEasyFilename);
+        if (imgURL != null) iconEasy = new ImageIcon(imgURL);
+        else System.err.println("Couldn't find file: " + imgEasyFilename);
+
+        String imgMediumFilename = "images/Medium.png";
+        imgURL = getClass().getClassLoader().getResource(imgMediumFilename);
+        if (imgURL != null) iconMedium = new ImageIcon(imgURL);
+        else System.err.println("Couldn't find file: " + imgMediumFilename);
+
+        String imgHintFilename = "images/Hint.png";
+        imgURL = getClass().getClassLoader().getResource(imgHintFilename);
+        if (imgURL != null) iconHint = new ImageIcon(imgURL);
+        else System.err.println("Couldn't find file: " + imgHintFilename);
+
+        String imgResetFilename = "images/Reset.png";
+        imgURL = getClass().getClassLoader().getResource(imgResetFilename);
+        if (imgURL != null) iconReset = new ImageIcon(imgURL);
+        else System.err.println("Couldn't find file: " + imgResetFilename);
 
         cp = getContentPane();
         cp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -155,6 +185,44 @@ public class GUI extends JFrame {
 
             }
         }
+        AiLevel = 5;
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(100, 100));
+        button.setName(Integer.toString((101)));
+        button.setIcon(iconEasy);
+        button.addActionListener(actionEvent -> AiLevel=5);
+        cp.add(button);
+
+
+        JButton button1 = new JButton();
+        button1.setPreferredSize(new Dimension(100, 100));
+        button1.setName(Integer.toString((102)));
+        button1.setIcon(iconMedium);
+        button1.addActionListener(actionEvent -> AiLevel=6);
+        cp.add(button1);
+
+        JButton button2 = new JButton();
+        button2.setPreferredSize(new Dimension(100, 100));
+        button2.setName(Integer.toString((103)));
+        button2.setIcon(iconHard);
+        button2.addActionListener(actionEvent -> AiLevel=7);
+        cp.add(button2);
+
+        JButton button3 = new JButton();
+        button3.setPreferredSize(new Dimension(100, 100));
+        button3.setName(Integer.toString((104)));
+        button3.setIcon(iconReset);
+        button3.addActionListener(actionEvent -> reset());
+        cp.add(button3);
+
+        JButton button4 = new JButton();
+        button4.setPreferredSize(new Dimension(100, 100));
+        button4.setName(Integer.toString((105)));
+        button4.setIcon(iconHint);
+        button4.addActionListener(actionEvent -> hint());
+        cp.add(button4);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         if(count==1) setTitle(title + "Yellow");
         else setTitle(title + "Red");
@@ -169,16 +237,20 @@ public class GUI extends JFrame {
         }
         else {
             gameType=-1;
-            reply = JOptionPane.showConfirmDialog(null, "Would you like the AI to be hard?", null, JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {
-                AiLevel = 6;
-                reply = JOptionPane.showConfirmDialog(null, "Very Hard?", null, JOptionPane.YES_NO_OPTION);
-                if (reply == JOptionPane.YES_OPTION) {
-                    AiLevel = 7;
-                }
-            } else {
-                AiLevel = 5;
-            }
         }
+    }
+    public void reset(){
+        System.out.println("Trying to play again...");
+        game.reset();
+        resetBoard();
+        MinMax AI = new MinMax();
+        count = 1;
+        gameType();
+    }
+    public void hint(){
+        AI.miniMax(game,AiLevel+1,true);
+        int bestPlace = AI.getCollumn();
+        JOptionPane.showMessageDialog(null, "The Ai recommends placing in collunm number: " +
+                bestPlace);
     }
 }
